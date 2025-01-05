@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notes Making App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div class="main w-full min-h-screen bg-zinc-900 flex flex-col items-center">
+        <div class="title py-10 text-center">
+            <h1 class="text-5xl font-bold text-white tracking-wide">Notes Making App</h1>
+            <p class="mt-2 text-zinc-400 text-lg">Organize your thoughts and tasks effortlessly</p>
+        </div>
+        <div class="form p-10 bg-zinc-800 rounded-lg shadow-lg text-white w-full max-w-md">
+            <form action="/create" method="post" class="space-y-4">
+                <input class="block w-full rounded-md px-5 py-3 bg-zinc-700 text-white focus:ring-2 focus:ring-blue-500 focus:outline-none" type="text" placeholder="Title goes here..." name="title">
+                <textarea class="block w-full rounded-md px-5 py-3 bg-zinc-700 text-white resize-none focus:ring-2 focus:ring-blue-500 focus:outline-none" name="details" rows="4" placeholder="Write your task here..."></textarea>
+                <input class="w-full bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-md font-medium cursor-pointer transition-all duration-300" type="submit" value="Create Task">
+            </form>
+        </div>
+        <div class="tasks flex flex-col gap-5 p-10 w-full max-w-4xl">
+            <% if (files.length > 0) { %>
+                <% files.forEach(function(val) { %>
+                    <div class="task bg-zinc-800 rounded-lg shadow-lg p-5 text-white">
+                        <h1 class="text-xl font-semibold text-white tracking-tight"><%= val %></h1>
+                        <div class="flex justify-between items-center mt-3">
+                            <a class="text-blue-500 hover:text-blue-400 transition-all duration-300 underline" href="/files/<%= val %>">
+                                Read more
+                            </a>
+                            <a class="text-zinc-500 hover:text-zinc-400 transition-all duration-300 underline" href="/edit/<%= val %>">
+                                Edit Filename
+                            </a>
+                        </div>
+                    </div>
+                <% }); %>
+            <% } else { %>
+                <h3 class="text-zinc-600 text-lg">No tasks yet. Start by creating one!</h3>
+            <% } %>
+        </div>
+    </div>
+</body>
+</html>
